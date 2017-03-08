@@ -1,24 +1,36 @@
-# README
+# PV system
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This application is built with rails connected to a postgres database.
 
-Things you may want to cover:
+## Tables
 
-* Ruby version
+**Users**
+  * username string
+  * password_digest string  
+  * session_token string
 
-* System dependencies
+**Utilities**
+  * string company_name
 
-* Configuration
+**Plans** belongs to utility
+  * utility_id int
+  * created_date timestamp
+  * time_of_use float[]
+    * arrays of pairs of threshold time hours,rate $/kWh, so length should always be even, and first entry value should be 0
+    * example [0.0,10.0,2.0,20.0] for 0:00-2:00 users pay 10.0, 2:00 ownwards pay 20.0
+  * tiers float[]
+    * arrays of pairs of threshold kWh,rate $/kWh, so length should always be even
 
-* Database creation
+**Subscriptions** belongs to user,utility
+  * user_id int
+  * utility_id int
 
-* Database initialization
+**Utility_Usages** belongs to subscription
+  * subscription_id int
+  * kWh_used float
+  * start_time timestamp
+  * end_time timestamp
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+**Api_Usages** belongs to user
+  * user_id int
+  * created_at timestamp
