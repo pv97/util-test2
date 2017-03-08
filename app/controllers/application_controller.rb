@@ -5,8 +5,9 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
-    return nil unless session[:session_token]
-    @current_user ||= User.find_by(session_token: session[:session_token])
+#    return nil unless session[:session_token]
+#    @current_user ||= User.find_by(session_token: session[:session_token])
+    @current_user = User.all[0]
   end
 
   def logged_in?
@@ -28,4 +29,16 @@ class ApplicationController < ActionController::Base
   def require_logged_in
     render json: {base: ['invalid credentials']}, status: 401 if !current_user
   end
+
+  def charge_api_usage
+    @api_usage = ApiUsage.new()
+    @api_usage.user_id = current_user.id
+    @api_usage.cost = 0.10
+    if @api_usage.save
+      render "api/api_usages/show"
+    else
+      render json: @api_usage.errors, status: 422
+    end
+  end
+
 end

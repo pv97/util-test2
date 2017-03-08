@@ -23,11 +23,12 @@ ActiveRecord::Schema.define(version: 20170308191237) do
   end
 
   create_table "plans", force: :cascade do |t|
-    t.integer  "utility_id",               null: false
-    t.float    "time_of_use", default: [], null: false, array: true
-    t.float    "tiers",       default: [], null: false, array: true
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "utility_id",                null: false
+    t.float    "month_of_use", default: [], null: false, array: true
+    t.float    "time_of_use",  default: [], null: false, array: true
+    t.float    "tiers",        default: [], null: false, array: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "subscriptions", force: :cascade do |t|

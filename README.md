@@ -1,8 +1,14 @@
 # PV system
 
-This application is built with rails connected to a postgres database.
+This application is built with rails connected to a postgresql database. APIs are set up assuming a single page application.
+To set up application,  run:
+  * bundle install
+  * rake db:setup
+  * rails s
 
-## Tables
+## Schema
+
+schema file found in db/schema.rb
 
 **Users**
   * username string
@@ -36,3 +42,25 @@ This application is built with rails connected to a postgres database.
 **Api_Usages** belongs to user
   * user_id int
   * created_at timestamp
+
+## API
+
+For testing purposes, current_user has set to always be the "test" user.
+Usable endpoints are found in config/routes.rb.
+Database is seeded with one entry for each table, found in db/seeds.rb.
+
+**Accessing API**
+
+Since this is a single page application, the APIs can be accessed by ajax requests in the browser terminal
+A sample ajax request is given by:
+  1. Defining success callback:
+    var success = function(val) { console.log(val) }
+  2. Calling a request:
+    $.ajax({
+      url: `api/utilities/`,
+      success:success
+    });
+
+**Charging User**
+
+Currently, users are charged for looking at utilities index and utility usage index
