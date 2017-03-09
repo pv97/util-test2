@@ -8,5 +8,6 @@ class CreateUtilityUsages < ActiveRecord::Migration[5.0]
 
       t.timestamps null:false
     end
+    add_index :utility_usages, :subscription_id
   end
 end

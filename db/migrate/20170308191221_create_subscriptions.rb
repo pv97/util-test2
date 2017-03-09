@@ -5,5 +5,7 @@ class CreateSubscriptions < ActiveRecord::Migration[5.0]
       t.integer :utility_id, null:false
       t.timestamps null:false
     end
+    add_index :subscriptions, :user_id
+    add_index :subscriptions, :utility_id
   end
 end

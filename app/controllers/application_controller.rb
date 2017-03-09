@@ -34,11 +34,7 @@ class ApplicationController < ActionController::Base
     @api_usage = ApiUsage.new()
     @api_usage.user_id = current_user.id
     @api_usage.cost = 0.10
-    if @api_usage.save
-      render "api/api_usages/show"
-    else
-      render json: @api_usage.errors, status: 422
-    end
+    @api_usage.save
   end
 
 end
